@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:WPFhello"
         mc:Ignorable="d"
         Title="Студентска информационна система" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="MainGrid">
         <GroupBox x:Name="gbPersonalData" Header="Лични данни" Height="140" VerticalAlignment="Top" Width="760">
-            <Grid>
+            <Grid x:Name="PersonalData">
                 <Label x:Name="lblFirstName" Content="Име:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="30" Margin="5,5,0,0"/>
                 <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Margin="110,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="30"/>
                 <Label x:Name="lblMiddleName" Content="Презиме:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="30" Margin="5,40,0,0"/>
@@ -18,7 +18,7 @@
             </Grid>
         </GroupBox>
         <GroupBox x:Name="gbStudentInformation" Header="Студентска информация" Height="270" VerticalAlignment="Top" Width="760" Margin="0,150,0,0">
-            <Grid>
+            <Grid x:Name="StudentInformation">
                 <Label x:Name="lblFaculty" Content="Факултет:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="30" Margin="5,30,0,0"/>
                 <TextBox x:Name="txtFaculty" HorizontalAlignment="Left" Margin="110,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="30"/>
                 <Label x:Name="lblSpeciality" Content="Специалност:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="30" Margin="5,65,0,0"/>
@@ -35,6 +35,10 @@
                 <TextBox x:Name="txtStream" HorizontalAlignment="Left" Margin="670,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Height="30"/>
                 <Label x:Name="lblGroup" Content="Група:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="30" Margin="610,100,0,0"/>
                 <TextBox x:Name="txtGroup" HorizontalAlignment="Left" Margin="670,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Height="30"/>
+                <Button x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="410,170,0,0" VerticalAlignment="Top" Width="70" Height="30" Click="btnClear_Click"/>
+                <Button x:Name="btnPopulateModel" Content="Populate" HorizontalAlignment="Left" Margin="490,170,0,0" VerticalAlignment="Top" Width="70" Height="30" Click="btnPopulateModel_Click"/>
+                <Button x:Name="btnDeactivateControls" Content="Deactivate" HorizontalAlignment="Left" Margin="570,170,0,0" VerticalAlignment="Top" Width="70" Height="30" Click="btnDeactivateControls_Click"/>
+                <Button x:Name="btnActivateControls" Content="Activate" HorizontalAlignment="Left" Margin="650,170,0,0" VerticalAlignment="Top" Width="70" Height="30" Click="btnActivateControls_Click"/>
             </Grid>
         </GroupBox>
     </Grid>

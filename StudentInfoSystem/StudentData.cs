@@ -9,6 +9,8 @@ namespace StudentInfoSystem
 
         public StudentData()
         {
+            TestStudents = new List<Student>();
+
             TestStudents?.Add(new Student()
             {
                 FirstName = "Ivan",
