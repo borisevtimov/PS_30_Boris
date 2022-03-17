@@ -18,15 +18,7 @@
 
         public static User IsUserPassCorrect(string username, string password)
         {
-            foreach (User user in TestUsers)
-            {
-                if (user.UserName == username && user.Password == password)
-                {
-                    return user;
-                }
-            }
-
-            return null;
+            return TestUsers.FirstOrDefault(x => x.UserName == username && x.Password == password);
         }
 
         public static void SetUserActiveTo(string username, DateTime newExpireDate)

@@ -20,16 +20,18 @@ namespace UserLogin
             }
         }
 
-        public static string GetCurrentSessionActivities() 
+        public static IEnumerable<string> GetCurrentSessionActivities(string filter) 
         {
-            StringBuilder result = new StringBuilder();
+            List<string> filteredActivities = (from activity in currentSessionActivities
+                                               where activity.Contains(filter)
+                                               select activity).ToList();
 
-            foreach (string currentActivity in currentSessionActivities)
-            {
-                result.AppendLine(currentActivity);
-            }
+            return currentSessionActivities;
+        }
 
-            return result.ToString();
+        public static IEnumerable<string> GetAllActivities()
+        {
+            return File.ReadAllLines("test.txt");
         }
     }
 }

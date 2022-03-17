@@ -8,7 +8,7 @@ string password = Console.ReadLine();
 
 LoginValidation validation = new LoginValidation(username, password, ActionOnError);
 
-User user = null;
+User? user = null;
 
 if (validation.ValidateUserInput(ref user))
 {
@@ -64,13 +64,29 @@ if (validation.ValidateUserInput(ref user))
                     break;
                 case 4:
 
-                    string log = File.ReadAllText("test.txt");
-                    Console.WriteLine(log);
+                    StringBuilder logStringBuilder = new StringBuilder();
+                    IEnumerable<string> allActs = Logger.GetAllActivities();
+
+                    foreach (string act in allActs)
+                    {
+                        logStringBuilder.AppendLine(act);
+                    }
+
+                    Console.WriteLine(logStringBuilder.ToString());
 
                     break;
                 case 5:
 
-                    Console.WriteLine(Logger.GetCurrentSessionActivities());
+                    StringBuilder sb = new StringBuilder();
+                    string filter = "user";
+                    IEnumerable<string> currentActs = Logger.GetCurrentSessionActivities(filter);
+
+                    foreach (string line in currentActs)
+                    {
+                        sb.Append(line);
+                    }
+
+                    Console.WriteLine(sb.ToString());
 
                     break;
                 default:
