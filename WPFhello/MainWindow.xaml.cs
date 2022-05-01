@@ -25,6 +25,16 @@ namespace WPFhello
         public MainWindow()
         {
             InitializeComponent();
+
+            ListBoxItem james = new ListBoxItem();
+            james.Content = "James";
+            ListBoxItem david = new ListBoxItem();
+            david.Content = "David";
+
+            peopleListBox.Items.Add(james);
+            peopleListBox.Items.Add(david);
+
+            peopleListBox.SelectedItem = james;
         }
 
         private void btn_Hello_Click(object sender, RoutedEventArgs e)
@@ -49,8 +59,15 @@ namespace WPFhello
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("This is Windows Presentation Foundation!");
-            textBlock1.Text = DateTime.Now.ToString();
+            MyMessage anotherWindow = new MyMessage();
+            anotherWindow.Show();
+        }
+
+        private void greetingMsg_Click(object sender, RoutedEventArgs e)
+        {
+            string? greetingMsg;
+            greetingMsg = (peopleListBox.SelectedItem as ListBoxItem).Content.ToString();
+            MessageBox.Show("Hi " + greetingMsg);
         }
     }
 }

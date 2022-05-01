@@ -22,5 +22,12 @@
         <Button HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="100" Click="Button_Click">
             Click me!
         </Button>
+        <ListBox x:Name="peopleListBox" IsSynchronizedWithCurrentItem="True" Width="150" Height="150" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,60,5,0">
+            <ListBoxItem Content="Mike"/>
+            <ListBoxItem Content="Lisa"/>
+            <ListBoxItem Content="John"/>
+            <ListBoxItem Content="Mary"/>
+        </ListBox>
+        <Button x:Name="greetingMsg" Content="Greeting" HorizontalAlignment="Right" Margin="0,220,75,0" VerticalAlignment="Top" Width="80" Click="greetingMsg_Click"/>
     </Grid>
 </Window>
