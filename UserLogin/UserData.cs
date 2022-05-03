@@ -16,33 +16,38 @@
             }
         }
 
-        public static User IsUserPassCorrect(string username, string password)
+        public static User? IsUserPassCorrect(string username, string password)
         {
-            return TestUsers.FirstOrDefault(x => x.UserName == username && x.Password == password);
+            UserContext context = new UserContext();
+
+            return context.Users.FirstOrDefault(u => u.UserName == username && u.Password == password);
         }
 
         public static void SetUserActiveTo(string username, DateTime newExpireDate)
         {
-            foreach (User user in TestUsers)
+            UserContext context = new UserContext();
+
+            User? user = context.Users.FirstOrDefault(u => u.UserName == username);
+
+            if (user != null)
             {
-                if (user.UserName == username)
-                {
-                    user.AccountExpireDate = newExpireDate;
-                    Logger.LogActivity("Промяна на активност на " + username);
-                }
+                user.AccountExpireDate = newExpireDate;
+                Logger.LogActivity("Промяна на активност на " + username);
             }
         }
 
         public static void AssignUserRole(string username, UserRoles role)
         {
-            foreach (User user in TestUsers)
+            UserContext context = new UserContext();
+
+            User? user = context.Users.FirstOrDefault(u => u.UserName == username);
+
+            if (user != null)
             {
-                if (user.UserName == username)
-                {
-                    user.Role = (int)role;
-                    Logger.LogActivity("Промяна на роля на " + username);
-                }
+                user.Role = (int)role;
             }
+
+            context.SaveChanges();
         }
 
         private static void ResetTestUserData()

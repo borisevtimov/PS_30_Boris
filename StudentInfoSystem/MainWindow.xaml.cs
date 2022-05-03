@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace StudentInfoSystem
 {
@@ -23,9 +25,20 @@ namespace StudentInfoSystem
     {
         public Student? Student { get; set; }
 
+        public List<string>? StudStatusChoices { get; set; } = new List<string>();
+
         public MainWindow()
         {
             InitializeComponent();
+            FillStudStatusChoices();
+            this.DataContext = this;
+
+            bool result = TestStudentsIfEmpty();
+
+            if (result)
+            {
+                CopyTestStudents();
+            }
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
@@ -177,7 +190,8 @@ namespace StudentInfoSystem
         private void EnterUser()
         {
             StudentData studentData = new StudentData();
-            Student = studentData.TestStudents?.FirstOrDefault();
+            //Student = studentData.TestStudents?.FirstOrDefault();
+            Student = new Student();
 
             foreach (var item in PersonalData.Children)
             {
@@ -286,6 +300,51 @@ namespace StudentInfoSystem
                     }
                 }
             }
+        }
+
+        private void FillStudStatusChoices()
+        {
+            using (IDbConnection connection = new SqlConnection(Properties.Settings.Default.DbConnect))
+            {
+                string sqlquery = @"SELECT StatusDescr FROM StudStatus";
+                IDbCommand command = new SqlCommand();
+                command.Connection = connection;
+                connection.Open();
+                command.CommandText = sqlquery;
+                IDataReader reader = command.ExecuteReader();
+                bool notEndOfResult;
+                notEndOfResult = reader.Read();
+
+                while (notEndOfResult)
+                {
+                    string s = reader.GetString(0);
+                    StudStatusChoices?.Add(s);
+                    notEndOfResult = reader.Read();
+                }
+            }
+        }
+
+        private bool TestStudentsIfEmpty()
+        {
+            StudentInfoContext context = new StudentInfoContext();
+            IEnumerable<Student> queryStudents = context.Students;
+
+            int countStudents = queryStudents.Count();
+
+            return countStudents == 0;
+        }
+
+        private void CopyTestStudents()
+        {
+            StudentInfoContext context = new StudentInfoContext();
+            StudentData data = new StudentData();
+
+            foreach (Student st in data.TestStudents)
+            {
+                context.Students.Add(st);
+            }
+
+            context.SaveChanges();
         }
     }
 }

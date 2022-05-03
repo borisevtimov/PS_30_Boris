@@ -4,11 +4,15 @@ namespace StudentInfoSystem
 {
     public class Student
     {
-        public string? FirstName { get; set; }
+        public int StudentId { get; set; }
+
+        public string FirstName { get; set; }
 
         public string? MiddleName { get; set; }
 
-        public string? LastName { get; set; }
+        public string LastName { get; set; }
+
+        public byte[]? Photo { get; set; }
 
         public string? Faculty { get; set; }
 
@@ -18,7 +22,7 @@ namespace StudentInfoSystem
 
         public EducationStatus Status { get; set; }
 
-        public string? FacultyNumber { get; set; }
+        public string FacultyNumber { get; set; }
 
         public int Course { get; set; }
 

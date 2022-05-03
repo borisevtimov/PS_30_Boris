@@ -8,6 +8,8 @@ namespace UserLogin
 
         public static void LogActivity(string activity)
         {
+            UserContext userContext = new UserContext();
+
             string activityLine = DateTime.Now + ";"
                 + LoginValidation.currentUserRole + ";"
                 + activity;
@@ -18,9 +20,11 @@ namespace UserLogin
             {
                 File.WriteAllText("test.txt", activityLine);
             }
+
+            userContext.Logs.Add(new Log { Message = activity });
         }
 
-        public static IEnumerable<string> GetCurrentSessionActivities(string filter) 
+        public static IEnumerable<string> GetCurrentSessionActivities(string filter)
         {
             List<string> filteredActivities = (from activity in currentSessionActivities
                                                where activity.Contains(filter)

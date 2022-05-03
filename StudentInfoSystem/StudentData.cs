@@ -1,5 +1,6 @@
 ﻿using StudentInfoSystem.Enums;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StudentInfoSystem
 {
@@ -11,20 +12,32 @@ namespace StudentInfoSystem
         {
             TestStudents = new List<Student>();
 
-            TestStudents?.Add(new Student()
+            if (!IsThereStudent("121219000"))
             {
-                FirstName = "Ivan",
-                MiddleName = "Georgiev",
-                LastName = "Ivanov",
-                Speciality = "Computer and software engineering",
-                Faculty = "FCST",
-                Course = 3,
-                FacultyNumber = "121219000",
-                Group = 30,
-                Degree = Degree.Professional,
-                Status = EducationStatus.Assured,
-                Stream = 9
-            });
+                TestStudents?.Add(new Student()
+                {
+                    FirstName = "Ivan",
+                    MiddleName = "Georgiev",
+                    LastName = "Ivanov",
+                    Speciality = "Computer and software engineering",
+                    Faculty = "FCST",
+                    Course = 3,
+                    FacultyNumber = "121219000",
+                    Group = 30,
+                    Degree = Degree.Professional,
+                    Status = EducationStatus.Assured,
+                    Stream = 9
+                });
+
+            }
+        }
+
+        public bool IsThereStudent(string facNum)
+        {
+            StudentInfoContext context = new StudentInfoContext();
+
+            Student? result = context.Students.SingleOrDefault(s => s.FacultyNumber == facNum);
+            return result != null;
         }
     }
 }
