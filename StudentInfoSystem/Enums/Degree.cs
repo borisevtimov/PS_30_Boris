@@ -2,8 +2,8 @@
 {
     public enum Degree
     {
-        HighSchool = 0,
-        Professional = 1,
-        Bachelor = 2
+        Средно = 0,
+        Професионално = 1,
+        Бакалавър = 2
     }
 }

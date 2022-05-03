@@ -22,7 +22,7 @@ namespace ExpenseIt
     public partial class ExpenseItHome : Window, INotifyPropertyChanged
     {
         private DateTime lastChecked;
-        public DateTime LastChecked 
+        public DateTime LastChecked
         {
             get
             {
@@ -36,10 +36,10 @@ namespace ExpenseIt
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs("LastChecked"));
                 }
-            } 
+            }
         }
 
-        public ObservableCollection<string> PersonsChecked{ get; set; }
+        public ObservableCollection<string> PersonsChecked { get; set; }
 
         public string MainCaptionText { get; set; }
 
@@ -56,13 +56,13 @@ namespace ExpenseIt
                     Name = "Mike",
                     Department = "Legal",
                     Expenses = new List<Expense>(){
-                        new Expense() { 
-                            ExpenseType = "Lunch", 
-                            ExpenseAmount = 50 
+                        new Expense() {
+                            ExpenseType = "Lunch",
+                            ExpenseAmount = 50
                         },
-                        new Expense() { 
-                            ExpenseType = "Transportation", 
-                            ExpenseAmount = 50 
+                        new Expense() {
+                            ExpenseType = "Transportation",
+                            ExpenseAmount = 50
                         }
                     }
                 },
@@ -70,13 +70,13 @@ namespace ExpenseIt
                     Name = "Lisa",
                     Department = "Marketing",
                     Expenses = new List<Expense>(){
-                        new Expense() { 
-                            ExpenseType = "Document printing", 
-                            ExpenseAmount = 50 
+                        new Expense() {
+                            ExpenseType = "Document printing",
+                            ExpenseAmount = 50
                         },
-                        new Expense() { 
-                            ExpenseType = "Gift", 
-                            ExpenseAmount = 125 
+                        new Expense() {
+                            ExpenseType = "Gift",
+                            ExpenseAmount = 125
                         }
                     }
                 },
@@ -84,17 +84,17 @@ namespace ExpenseIt
                     Name = "John",
                     Department = "Engineering",
                     Expenses = new List<Expense>(){
-                        new Expense() { 
-                            ExpenseType = "Magazine subscription", 
-                            ExpenseAmount = 50 
+                        new Expense() {
+                            ExpenseType = "Magazine subscription",
+                            ExpenseAmount = 50
                         },
-                        new Expense() { 
-                            ExpenseType = "New machine", 
-                            ExpenseAmount = 600 
+                        new Expense() {
+                            ExpenseType = "New machine",
+                            ExpenseAmount = 600
                         },
-                        new Expense() { 
-                            ExpenseType = "Software", 
-                            ExpenseAmount = 500 
+                        new Expense() {
+                            ExpenseType = "Software",
+                            ExpenseAmount = 500
                         }
                     }
                 },
@@ -102,9 +102,9 @@ namespace ExpenseIt
                     Name = "Mary",
                     Department ="Finance",
                     Expenses = new List<Expense>(){
-                        new Expense() { 
-                            ExpenseType = "Dinner", 
-                            ExpenseAmount = 100 
+                        new Expense() {
+                            ExpenseType = "Dinner",
+                            ExpenseAmount = 100
                         }
                     }
                 },
@@ -112,9 +112,9 @@ namespace ExpenseIt
                     Name = "Theo",
                     Department = "Marketing",
                     Expenses = new List<Expense>(){
-                        new Expense() { 
-                            ExpenseType = "Dinner", 
-                            ExpenseAmount = 100 
+                        new Expense() {
+                            ExpenseType = "Dinner",
+                            ExpenseAmount = 100
                         }
                     }
                 },

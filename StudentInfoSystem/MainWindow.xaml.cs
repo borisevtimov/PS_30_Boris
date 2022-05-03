@@ -23,6 +23,8 @@ namespace StudentInfoSystem
     /// </summary>
     public partial class MainWindow : Window
     {
+        private StudentInfoContext context;
+
         public Student? Student { get; set; }
 
         public List<string>? StudStatusChoices { get; set; } = new List<string>();
@@ -32,6 +34,7 @@ namespace StudentInfoSystem
             InitializeComponent();
             FillStudStatusChoices();
             this.DataContext = this;
+            context = new StudentInfoContext();
 
             bool result = TestStudentsIfEmpty();
 
@@ -39,6 +42,8 @@ namespace StudentInfoSystem
             {
                 CopyTestStudents();
             }
+
+            txtStatus.ItemsSource = StudStatusChoices;  
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
@@ -190,7 +195,6 @@ namespace StudentInfoSystem
         private void EnterUser()
         {
             StudentData studentData = new StudentData();
-            //Student = studentData.TestStudents?.FirstOrDefault();
             Student = new Student();
 
             foreach (var item in PersonalData.Children)
@@ -300,6 +304,11 @@ namespace StudentInfoSystem
                     }
                 }
             }
+
+            context.Students.Add(Student);
+            context.SaveChanges();
+            StudentInfoList studentInfo = new StudentInfoList();
+            studentInfo.ShowDialog();
         }
 
         private void FillStudStatusChoices()
