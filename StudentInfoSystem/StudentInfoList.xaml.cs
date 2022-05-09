@@ -38,8 +38,7 @@ namespace StudentInfoSystem
         {
             return context.Students
                 .ToList()
-                .Where(s => s.Status == EducationStatus.Редовен || s.Status == EducationStatus.Задочен 
-                                    || s.Status == EducationStatus.СамостоятелнаПодготовка)
+                .Where(s => s.Status == EducationStatus.Редовен || s.Status == EducationStatus.Задочен)
                 .OrderBy(s => s.FirstName)
                 .ThenByDescending(s => s.Course)
                 .ThenBy(s => s.LastName)

@@ -303,6 +303,24 @@ namespace StudentInfoSystem
                         }
                     }
                 }
+
+                if (item is ListBox)
+                {
+                    if (((ListBox)item).Name.Equals("txtStatus"))
+                    {
+                        EducationStatus status;
+
+                        if (Enum.TryParse(((ListBox)item).SelectedItem.ToString(), out status))
+                        {
+                            Student.Status = status;
+                        }
+                        else
+                        {
+                            DeactivateControls();
+                            return;
+                        }
+                    }
+                }
             }
 
             context.Students.Add(Student);
