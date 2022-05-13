@@ -3,8 +3,11 @@ using UserLogin;
 
 Console.OutputEncoding = Encoding.UTF8;
 
-string username = Console.ReadLine();
-string password = Console.ReadLine();
+Console.Write("Enter username: ");
+string? username = Console.ReadLine();
+
+Console.Write("Enter password: ");
+string? password = Console.ReadLine();
 
 LoginValidation validation = new LoginValidation(username, password, ActionOnError);
 

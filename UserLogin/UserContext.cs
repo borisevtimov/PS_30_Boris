@@ -9,11 +9,9 @@ namespace UserLogin
         public DbSet<Log> Logs { get; set; }
 
         public UserContext()
+            : base("Data Source=BORISPC;Initial Catalog=ConsoleApp;Integrated Security=True")
         {
-            if (!Database.Exists())
-            {
 
-            }
         }
     }
 }
