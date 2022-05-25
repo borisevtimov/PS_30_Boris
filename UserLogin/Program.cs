@@ -30,72 +30,100 @@ if (validation.ValidateUserInput(ref user))
             Console.WriteLine($"Welcome, {(UserRoles)user.Role}");
             Console.WriteLine();
 
-            ShowAdminMenu();
-            int choice = int.Parse(Console.ReadLine());
-
-            switch (choice)
+            while (true)
             {
-                case 0:
-                    Console.WriteLine("Приятен ден!");
 
-                    return;
-                case 1:
+                ShowAdminMenu();
+                int choice = int.Parse(Console.ReadLine());
 
-                    Console.Write("Въведете потребителско име: ");
-                    string usernameForRole = Console.ReadLine();
+                switch (choice)
+                {
+                    case 0:
+                        Console.WriteLine("Приятен ден!");
 
-                    Console.Write("Въведете новата роля (число): ");
-                    UserRoles newRole = (UserRoles)int.Parse(Console.ReadLine());
+                        return;
+                    case 1:
 
-                    UserData.AssignUserRole(usernameForRole, newRole);
+                        Console.Write("Въведете потребителско име: ");
+                        string usernameForRole = Console.ReadLine();
 
-                    break;
-                case 2:
+                        Console.Write("Въведете новата роля (число): ");
+                        UserRoles newRole = (UserRoles)int.Parse(Console.ReadLine());
 
-                    Console.Write("Въведете потребителско име: ");
-                    string usernameForStatus = Console.ReadLine();
+                        UserData.AssignUserRole(usernameForRole, newRole);
 
-                    Console.Write("Въведете новата дата: ");
-                    DateTime resultDateTime;
+                        break;
+                    case 2:
 
-                    DateTime.TryParse(Console.ReadLine(), out resultDateTime);
+                        Console.Write("Въведете потребителско име: ");
+                        string usernameForStatus = Console.ReadLine();
 
-                    UserData.SetUserActiveTo(usernameForStatus, resultDateTime);
+                        Console.Write("Въведете новата дата: ");
+                        DateTime resultDateTime;
 
-                    break;
-                case 3:
-                    break;
-                case 4:
+                        DateTime.TryParse(Console.ReadLine(), out resultDateTime);
 
-                    StringBuilder logStringBuilder = new StringBuilder();
-                    IEnumerable<string> allActs = Logger.GetAllActivities();
+                        UserData.SetUserActiveTo(usernameForStatus, resultDateTime);
 
-                    foreach (string act in allActs)
-                    {
-                        logStringBuilder.AppendLine(act);
-                    }
+                        break;
+                    case 3:
 
-                    Console.WriteLine(logStringBuilder.ToString());
+                        UserContext userContext = new UserContext();
 
-                    break;
-                case 5:
+                        List<User> users = userContext.Users
+                            .ToList()
+                            .Select(u => new User()
+                            {
+                                UserName = u.UserName,
+                                FakNum = u.FakNum,
+                                Role = u.Role,
+                                Created = u.Created,
+                                AccountExpireDate = u.AccountExpireDate
+                            })
+                            .ToList();
 
-                    StringBuilder sb = new StringBuilder();
-                    string filter = "user";
-                    IEnumerable<string> currentActs = Logger.GetCurrentSessionActivities(filter);
+                        for (int i = 0; i < users.Count; i++)
+                        {
+                            Console.WriteLine($"    {i + 1}: Username: {users[i].UserName}");
+                            Console.WriteLine($"      FakNum: {users[i].FakNum}");
+                            Console.WriteLine($"      Role: {users[i].Role}");
+                            Console.WriteLine($"      CreatedOn: {users[i].Created}");
+                            Console.WriteLine($"      ExpiresOn: {users[i].AccountExpireDate}");
+                            Console.WriteLine($"    ----------------------------");
+                        }
 
-                    foreach (string line in currentActs)
-                    {
-                        sb.Append(line);
-                    }
+                        break;
+                    case 4:
 
-                    Console.WriteLine(sb.ToString());
+                        StringBuilder logStringBuilder = new StringBuilder();
+                        IEnumerable<string> allActs = Logger.GetAllActivities();
 
-                    break;
-                default:
-                    break;
+                        foreach (string act in allActs)
+                        {
+                            logStringBuilder.AppendLine(act);
+                        }
+
+                        Console.WriteLine(logStringBuilder.ToString());
+
+                        break;
+                    case 5:
+
+                        StringBuilder sb = new StringBuilder();
+                        string filter = "user";
+                        IEnumerable<string> currentActs = Logger.GetCurrentSessionActivities(filter);
+
+                        foreach (string line in currentActs)
+                        {
+                            sb.Append(line);
+                        }
+
+                        Console.WriteLine(sb.ToString());
+
+                        break;
+                    default:
+                        break;
+                }
             }
-            break;
         case 2:
             Console.WriteLine($"Welcome, {(UserRoles)user.Role}");
             break;
@@ -111,14 +139,15 @@ if (validation.ValidateUserInput(ref user))
     }
 }
 
-void ActionOnError(string errorMessage) 
+void ActionOnError(string errorMessage)
 {
     Console.WriteLine($"{errorMessage}!");
 }
 
-void ShowAdminMenu() 
+void ShowAdminMenu()
 {
     Console.WriteLine("Изберете опция:");
+    Console.WriteLine("0: Изход");
     Console.WriteLine("1: Промяна на роля на потребител");
     Console.WriteLine("2: Промяна на активност на потребител");
     Console.WriteLine("3: Списък на потребителите");

@@ -22,6 +22,7 @@ namespace UserLogin
             }
 
             userContext.Logs.Add(new Log { Message = activity });
+            userContext.SaveChanges();
         }
 
         public static IEnumerable<string> GetCurrentSessionActivities(string filter)
@@ -35,7 +36,9 @@ namespace UserLogin
 
         public static IEnumerable<string> GetAllActivities()
         {
-            return File.ReadAllLines("test.txt");
+            UserContext userContext = new UserContext();
+
+            return userContext.Logs.Select(l => l.Message).ToList();
         }
     }
 }
